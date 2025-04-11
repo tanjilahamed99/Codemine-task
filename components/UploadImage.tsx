@@ -10,7 +10,6 @@ type UploadImagesProps = {
 };
 
 const UploadImage: React.FC<UploadImagesProps> = ({ setImages }) => {
-
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
@@ -39,7 +38,7 @@ const UploadImage: React.FC<UploadImagesProps> = ({ setImages }) => {
       }
     }
 
-    setImages(prev => [...uploadedImageUrls, ...prev]);
+    setImages((prev) => [...uploadedImageUrls, ...prev]);
   };
 
   return (
@@ -47,7 +46,7 @@ const UploadImage: React.FC<UploadImagesProps> = ({ setImages }) => {
       <div>
         <label htmlFor="type3-2-upload" className="flex w-full max-w-[170px]">
           <p className="w-max truncate rounded-full hover:shadow-[0px_0px_4px_0.5px] border-[3px] border-green-500 px-6 py-1.5 font-medium text-green-500 shadow-md">
-            CHOOSE FILES
+            Upload Image
           </p>
         </label>
         <input
