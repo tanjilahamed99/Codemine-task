@@ -34,7 +34,10 @@ export default function Home() {
     });
   };
 
-  const handleCurrentPage = (_event: React.ChangeEvent<unknown>, pageNumber: number) => {
+  const handleCurrentPage = (
+    _event: React.ChangeEvent<unknown>,
+    pageNumber: number
+  ) => {
     setCurrentPage(pageNumber);
   };
 
@@ -46,53 +49,68 @@ export default function Home() {
     if (currentPage > pageNeed) {
       setCurrentPage(1);
     }
-  }, [images]);
+  }, [images, currentPage]);
 
   // Calculate start and end index for current page
   const startIndex = (currentPage - 1) * perPageImage;
   const endIndex = startIndex + perPageImage;
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-between">
       <Navbar />
-      <h2 className="text-2xl md:text-3xl font-semibold text-center mt-5">
-        Image Gallery
-      </h2>
 
-      <div className="flex justify-between container mx-auto px-2 lg:px-0 mt-5">
-        <div></div>
-        <UploadImage setImages={setImages} images={images} />
-      </div>
-
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5 px-2 lg:px-0">
-        {images.slice(startIndex, endIndex).map((img: string, idx: number) => (
-          <div key={idx} className="relative border border-gray-700 w-full h-[300px]">
-            <Image
-              src={img}
-              alt={idx + " not found"}
-              height={500}
-              width={500}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute top-2 left-3">
-              <ImageModal img={img} />
-            </div>
-            <MdDelete
-              onClick={() => handleImageDelete(img)}
-              className="absolute text-2xl text-red-600 top-2 right-3 cursor-pointer"
-            />
+      <main className="flex-1">
+        <section className="container mx-auto px-4 lg:px-8 py-10">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-800">
+              📷 Image Gallery
+            </h2>
+            <UploadImage setImages={setImages}/>
           </div>
-        ))}
-      </div>
 
-      <div className="flex justify-center mb-5">
-        <Pagination
-          onChange={handleCurrentPage}
-          count={page}
-          page={currentPage}
-          color="primary"
-        />
-      </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {images
+              .slice(startIndex, endIndex)
+              .map((img: string, idx: number) => (
+                <div
+                  key={idx}
+                  className="relative rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 bg-white"
+                >
+                  <Image
+                    src={img}
+                    alt={`Image ${idx}`}
+                    height={500}
+                    width={500}
+                    className="w-full h-64 object-cover"
+                  />
+
+                  {/* Modal Button */}
+                  <div className="absolute top-3 left-3">
+                    <ImageModal img={img} />
+                  </div>
+
+                  {/* Delete Icon */}
+                  <MdDelete
+                    onClick={() => handleImageDelete(img)}
+                    className="absolute top-3 right-3 text-3xl text-red-600 cursor-pointer hover:text-red-700 transition"
+                  />
+                </div>
+              ))}
+          </div>
+
+          {/* Pagination */}
+          {images.length > 0 && (
+            <div className="flex justify-center mt-10">
+              <Pagination
+                onChange={handleCurrentPage}
+                count={page}
+                page={currentPage}
+                color="primary"
+              />
+            </div>
+          )}
+        </section>
+      </main>
 
       <Footer />
     </div>
