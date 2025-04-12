@@ -7,7 +7,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import Swal, { SweetAlertResult } from "sweetalert2";
-import { HiMiniViewfinderCircle } from "react-icons/hi2";
 import ImageModal from "@/components/Modal";
 
 export default function Home() {
@@ -39,20 +38,24 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <h2 className="text-3xl font-semibold text-center mt-5">Image Gallery</h2>
-      <div className="flex justify-between container mx-auto">
+      <h2 className="text-2xl md:text-3xl font-semibold text-center mt-5">Image Gallery</h2>
+      <div className="flex justify-between container mx-auto px-2 lg:px-0 mt-5">
         <div></div>
         <UploadImage setImages={setImages} />
       </div>
 
-      <div className="container mx-auto grid grid-cols-3 gap-5 my-5">
+      <div className="container mx-auto  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5 px-2 lg:px-0">
         {images?.map((img: string, idx: number) => (
-          <div key={idx} className="relative border border-gray-700">
+          <div
+            key={idx}
+            className="relative border border-gray-700 w-full h-[300px]"
+          >
             <Image
-              src={"https://i.ibb.co.com/1CZbb3F/appointment.jpg"}
+              src={img}
               alt={idx + "not found"}
               height={500}
               width={500}
+              className="w-full h-full"
             />
             <div className="absolute top-2 left-3">
               <ImageModal img={img} />
