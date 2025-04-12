@@ -8,6 +8,7 @@ import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import Swal, { SweetAlertResult } from "sweetalert2";
 import ImageModal from "@/components/Modal";
+import Pagination from "@mui/material/Pagination";
 
 export default function Home() {
   const [images, setImages] = useState<string[]>([]);
@@ -35,10 +36,21 @@ export default function Home() {
     });
   };
 
+
+
+  
+
+
+
+
+
+
   return (
     <div>
       <Navbar />
-      <h2 className="text-2xl md:text-3xl font-semibold text-center mt-5">Image Gallery</h2>
+      <h2 className="text-2xl md:text-3xl font-semibold text-center mt-5">
+        Image Gallery
+      </h2>
       <div className="flex justify-between container mx-auto px-2 lg:px-0 mt-5">
         <div></div>
         <UploadImage setImages={setImages} />
@@ -67,7 +79,9 @@ export default function Home() {
           </div>
         ))}
       </div>
-
+      <div className="flex justify-center mb-5">
+        <Pagination count={10} color="primary" />
+      </div>
       <Footer />
     </div>
   );
