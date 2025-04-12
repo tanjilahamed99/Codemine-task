@@ -7,6 +7,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import Swal, { SweetAlertResult } from "sweetalert2";
+import { HiMiniViewfinderCircle } from "react-icons/hi2";
+import ImageModal from "@/components/Modal";
 
 export default function Home() {
   const [images, setImages] = useState<string[]>([]);
@@ -43,15 +45,18 @@ export default function Home() {
         <UploadImage setImages={setImages} />
       </div>
 
-      <div className="container mx-auto grid grid-cols-3 gap-5 mt-5">
+      <div className="container mx-auto grid grid-cols-3 gap-5 my-5">
         {images?.map((img: string, idx: number) => (
-          <div key={idx} className="relative">
+          <div key={idx} className="relative border border-gray-700">
             <Image
               src={"https://i.ibb.co.com/1CZbb3F/appointment.jpg"}
               alt={idx + "not found"}
               height={500}
               width={500}
             />
+            <div className="absolute top-2 left-3">
+              <ImageModal img={img} />
+            </div>
             <MdDelete
               onClick={() => handleImageDelete(img)}
               className="absolute text-2xl text-red-600 top-2 right-3 cursor-pointer"
@@ -61,7 +66,6 @@ export default function Home() {
       </div>
 
       <Footer />
-      
     </div>
   );
 }
