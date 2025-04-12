@@ -56,18 +56,17 @@ export default function Home() {
   const endIndex = startIndex + perPageImage;
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-between">
+    <div className=" bg-gray-50 flex flex-col justify-between">
       <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 mb-40">
         <section className="container mx-auto px-4 lg:px-8 py-10">
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex justify-between items-start mb-8">
             <h2 className="text-3xl font-bold text-gray-800">
               📷 Image Gallery
             </h2>
-            <UploadImage setImages={setImages}/>
+            <UploadImage setImages={setImages} />
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {images
               .slice(startIndex, endIndex)
